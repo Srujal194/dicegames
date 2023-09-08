@@ -3,4 +3,13 @@
     <string name="wallet_info">Click the die to roll.\nYou earn 5 coins every time you roll a six!</string>
     <string name="coins">Coins</string>
     <string name="zero">0</string>
+    <string name="wager">Wager</string>
+    <string name="plus">+</string>
+    <string name="minus">-</string>
+    <string name="return_to_wallet">RETURN TO THE WALLET</string>
+    <string name="roll">ROLL</string>
+    <string name="odd">ODD</string>
+    <string name="guess_the_sum">"GUESS THE SUM "</string>
+    <string name="even">EVEN</string>
+    <string name="cho_han">CHO-HAN\n</string>
 </resources>

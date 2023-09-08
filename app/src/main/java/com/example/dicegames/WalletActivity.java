@@ -1,8 +1,10 @@
 package com.example.dicegames;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -13,7 +15,8 @@ public class WalletActivity extends AppCompatActivity {
 
     private static int INCREMENT=5;
     private static int WIN_VALUE=6;
-    private static final String KEY_BALANCE="KEY BALANCE";
+    public static final int CHOHAN_REQUEST_CODE=2;
+    public static final String KEY_BALANCE="KEY BALANCE";
     private static final String KEY_DIE_VALUE="KEY DIE VALUE";
     private static Button mDieButton;
     private static Die mDie;
@@ -21,7 +24,6 @@ public class WalletActivity extends AppCompatActivity {
     private static TextView mTextBalance;
     private static int DieValue=0;
     private static final String TAG ="WalletActivity";
-
     @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
@@ -29,6 +31,22 @@ public class WalletActivity extends AppCompatActivity {
         outState.putInt(KEY_BALANCE,mBalance);
         outState.putInt(KEY_DIE_VALUE,DieValue);
         Log.d(TAG,"Saved:balance="+mBalance+", Saved:dievalue="+mDie.value());
+    }
+    public void launchChoHan(View view){
+        Intent intent = new Intent(this,ChoHanActivity.class);
+        intent.putExtra(KEY_BALANCE,mBalance);
+        startActivityForResult(intent,CHOHAN_REQUEST_CODE);
+    }
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        Log.d(TAG,"onActivityResult");
+        if(requestCode==CHOHAN_REQUEST_CODE && resultCode==RESULT_OK){
+            if(data!=null){
+                int balance =  data.getIntExtra(ChoHanActivity.KEY_BALANCE_RETURN,0);
+                Log.d(TAG,"Balance after result: "+balance);
+                mTextBalance.setText(Integer.toString(balance));
+            }
+        }
     }
 
     @Override
